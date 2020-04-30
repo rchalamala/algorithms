@@ -2,7 +2,7 @@
 Initialization: BFS<datatype> b(N); // N == amount of vertices
 addEdge Operation: b.addEdge(u, v); // u, v == edge vertices
 explore Operation: b.explore(source); // source == vertex to start BFS from
-getAdjList Operation: b.getAdjList(i); // i == vertex of requested adjacency list // returns adjList[i]
+getAdjList Operation: b.getAdjList(i); // i == vertex of requested adjacency list // returns adjList[i] vector
 getVisited Operation: b.getVisited(); // returns visited vector
 */
 
@@ -46,9 +46,10 @@ public:
 Initialization: BFSwithDepth<datatype> b(N); // N == amount of vertices
 addEdge Operation: b.addEdge(u, v); // u, v == edge vertices
 explore Operation: b.explore(source); // source == vertex to start BFS from
-getAdjList Operation: b.getAdjList(i); // i == vertex of requested adjacency list // returns adjList[i]
-getLevels Operation: b.getLevels(); // returns levels of depth relative to the most recent b.explore() source vertex
+getAdjList Operation: b.getAdjList(i); // i == vertex of requested adjacency list // returns adjList[i] vector
+getAllLevels Operation: b.getAllLevels(); // returns all levels of depth relative to the most recent b.explore() source vertex // returns levels vector
 getVisited Operation: b.getVisited(); // returns visited vector
+depth Operation: b.depth(u); // u == vertex of requested level // returns levels[u]
 */
 
 template <class T>
@@ -88,6 +89,7 @@ public:
 		}
 	}
 	vector<T> getAdjList(const T index) { return adjList[index]; }
-	vector<T> getLevels() { return levels; }
+	vector<T> getAllLevels() { return levels; }
 	vector<bool> getVisited() { return visited; }
+	T depth(const T node) { return levels[node]; }
 };

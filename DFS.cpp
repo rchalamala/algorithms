@@ -2,7 +2,7 @@
 Initialization: DFS<datatype> d(N); // N == amount of vertices
 addEdge Operation: d.addEdge(u, v); // u, v == edge vertices
 explore Operation: d.explore(source); // source == vertex to start DFS from
-getAdjList Operation: d.getAdjList(i); // i == vertex of requested adjacency list // returns adjList[i]
+getAdjList Operation: d.getAdjList(i); // i == vertex of requested adjacency list // returns adjList[i] vector
 getVisited Operation: d.getVisited(); // returns visited vector
 */
 
@@ -51,8 +51,9 @@ Initialization: DFSwithComponents<datatype> d(N); // N == amount of vertices
 addEdge Operation: d.addEdge(u, v); // u, v == edge vertices
 explore Operation: d.explore(source); // source == vertex to start DFS from
 getAdjList Operation: d.getAdjList(i); // i == vertex of requested adjacency list // returns adjList[i]
-getComponents Operation: d.getComponents(); // returns connected components relative to edges added before the most d.explore()
+getAllComponents Operation: d.getAllComponents(); // returns all components relative to edges added before the most d.explore() // returns components vector
 getVisited Operation: d.getVisited(); // returns visited vector
+connected Operation: d.connected(u, v) // u, v == edge vertices // returns true if u and v are connected else returns false
 */
 template <class T>
 class DFSwithComponents
@@ -99,6 +100,7 @@ public:
 		}
 	}
 	vector<T> getAdjList(const T index) { return adjList[index]; }
-	vector<T> getComponents() { return components; }
+	vector<T> getAllComponents() { return components; }
 	vector<bool> getVisited() { return visited; }
+	bool connected(const T u, const T v) { return components[u] == components[v]; }
 };
