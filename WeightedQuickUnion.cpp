@@ -1,4 +1,5 @@
 /*
+// ZERO-INDEXED
 Initialization: QuickUnion<datatype> q(N); // N == amount of vertices
 Union Operation: q.qunion(u, v); // u, v == edge vertices
 Find Operation: q.find(u, v); // u, v == edge vertices // returns true if u and v are connected else returns false
