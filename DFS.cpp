@@ -9,7 +9,7 @@ getVisited Operation: d.getVisited(); // returns visited vector
 template <class T>
 class DFS
 {
-	T n;
+	const T n;
 	vector<T> adjList;
 	vector<bool> visited;
 public:
@@ -58,7 +58,7 @@ connected Operation: d.connected(u, v) // u, v == edge vertices // returns true 
 template <class T>
 class DFSwithComponents
 {
-	T n;
+	const T n;
 	vector<T> adjList, components;
 	vector<bool> visited;
 public:

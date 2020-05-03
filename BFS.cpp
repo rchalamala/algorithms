@@ -9,7 +9,7 @@ getVisited Operation: b.getVisited(); // returns visited vector
 template <class T>
 class BFS
 {
-	T n;
+	const T n;
 	vector<T> adjList;
 	vector<bool> visited;
 public:
@@ -55,7 +55,7 @@ depth Operation: b.depth(u); // u == vertex of requested level // returns levels
 template <class T>
 class BFSwithDepth
 {
-	T n;
+	const T n;
 	vector<T> adjList, levels;
 	vector<bool> visited;
 public:
