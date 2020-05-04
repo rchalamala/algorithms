@@ -3,9 +3,10 @@ Call: fast_exp(base, exponent, modulus); // base == exponentiation base, exponen
 */
 
 template <typename T>
-T fast_exp(T base, T exponent, const T modulus) {
+T fast_exp(T base, T exponent, const T modulus)
+{
     T result = 1;
-    while(exponnt > 0) {
+    while(exponent > 0) {
     	if(exponent % 2 == 1)
 		{
 	   		result *= base;

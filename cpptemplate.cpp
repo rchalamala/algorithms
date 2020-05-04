@@ -14,11 +14,11 @@ using namespace std;
 #define VISUALSTUDIO
 
 using ll = long long;
-using ul = unsigned long long;
+using ull = unsigned long long;
 
 using vi = std::vector<int>;
 using vll = std::vector<long long>;
-using vul = std::vector<unsigned long long>;
+using vull = std::vector<unsigned long long>;
 
 #define FOR(i,a,b) for (auto i = (a); i < (b); ++i)
 #define F0R(i,a) FOR(i,0,a)
@@ -46,8 +46,8 @@ void setIO(const std::string name = "")
 	std::cin.tie(nullptr);
 	if (!name.empty())
 	{
-		freopen(name + ".in", "r", stdin);
-		freopen(name + ".out", "w", stdout);
+		freopen((name + ".in").c_str(), "r", stdin);
+		freopen((name + ".out").c_str(), "w", stdout);
 	}
 }
 #else
@@ -75,7 +75,7 @@ class Timer
 public:
 	Timer() : m_beg(std::chrono::high_resolution_clock::now()) {}
 	void reset() { m_beg = std::chrono::high_resolution_clock::now(); }
-	double elapsed() const { return std::chrono::duration_cast<std::chrono::duration<double, std::ratio<1> >>(std::chrono::high_resolution_clock::now() - m_beg).count(); }
+	[[nodiscard]] double elapsed() const { return std::chrono::duration_cast<std::chrono::duration<double, std::ratio<1> >>(std::chrono::high_resolution_clock::now() - m_beg).count(); }
 };
 
 //*****

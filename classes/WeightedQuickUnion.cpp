@@ -1,7 +1,7 @@
 /*
 Initialization: QuickUnion<datatype> q(N); // N == amount of vertices
 qunion Operation: q.qunion(u, v); // u, v == edge vertices
-qfind Operation: q.find(u, v); // u, v == edge vertices // returns true if u and v are connected else returns false
+qfind Operation: q.find(u, v); // u, v == edge vertices // returns u and v are connected
 */
 
 template <class T>

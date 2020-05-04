@@ -1,7 +1,6 @@
 /*
 Initialization: BinarySearch<datatype> b(N); // N == amount of vertices
-qunion Operation: q.qunion(u, v); // u, v == edge vertices
-qfind Operation: q.find(u, v); // u, v == edge vertices // returns true if u and v are connected else returns false
+find Operation: b.find(target, low, high) // target == element to look for, low == lower bound of search, high = upper bound of search // returns target index if found otherwise N
 */
 
 template <class T>
