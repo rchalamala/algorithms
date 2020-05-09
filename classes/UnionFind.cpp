@@ -1,11 +1,11 @@
 /*
-Initialization: QuickUnion<datatype> q(N); // N == amount of vertices
-qunion Operation: q.qunion(u, v); // u, v == edge vertices
-qfind Operation: q.find(u, v); // u, v == edge vertices // returns u and v are connected
+Initialization: UnionFind<datatype> uf(N); // N == amount of vertices
+qunion Operation: uf.qunion(u, v); // u, v == edge vertices
+qfind Operation: uf.qfind(u, v); // u, v == edge vertices // returns u and v are connected
 */
 
 template <class T>
-class QuickUnion
+class UnionFind
 {
 	vector<T> parents, sizes;
 	T root(T i)

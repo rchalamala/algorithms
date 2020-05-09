@@ -10,7 +10,7 @@ T fast_exp(T base, T exponent, const T modulus)
     	if(exponent % 2 == 1)
 		{
 	   		result *= base;
-			res %= modulus;
+			result %= modulus;
 		}
 		base *= base;
 		base %= modulus;
