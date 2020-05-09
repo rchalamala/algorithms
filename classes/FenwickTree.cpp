@@ -25,5 +25,5 @@ public:
 			sum += table[i];
 		return sum;
 	}
-	T query(T i, T j) { return sum(j) - sum(i); }
+	T query(T i, T j) { return sum(j) - sum(--i); }
 };
