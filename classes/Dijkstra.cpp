@@ -1,3 +1,7 @@
+/*
+
+*/
+
 template <class T>
 class Dijkstra
 {
