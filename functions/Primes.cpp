@@ -49,5 +49,5 @@ bitset<MAXN> sieve()
 
 /*
 // Sieve of Eratosthenes (kindof, but faster, generates prime factorization, and uses more space) (COMPILE TIME CONSTANT REQUIRED - space-efficient)
-Call: sieve<datatype> () // define #MAXN maximum nvalue or const <datatype> MAXN = maximum nvalue or constexpr <datatype> MAXN = maximum nvalue somewhere above the function // returns bitset with all primes marked as 1 and all composites marked as 0
+Call: sieve<datatype> () // define #MAXN maximum nvalue or const <datatype> MAXN = maximum nvalue or constexpr <datatype> MAXN = maximum nvalue // returns bitset with all primes marked as 1 and all composites marked as 0
 */
