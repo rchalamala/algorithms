@@ -9,20 +9,15 @@ getVisited Operation: b.getVisited(); // returns visited vector
 template <class T>
 class BFS
 {
-	const T n;
 	vector<T> adjList;
 	vector<bool> visited;
 public:
-	BFS(const T size) : n{size} { adjList.resize(size); }
-	void addEdge(const T u, const T v)
-	{
-		adjList[u].push_back(v);
-		adjList[v].push_back(u);
-	}
+	BFS(const T size) { adjList.resize(size); }
+	void addEdge(const T u, const T v) { adjList[u].push_back(v); }
 	void explore(const T source)
 	{
 		visited.clear();
-		visited.resize(n, false);
+		visited.resize(adjList.size(), false);
 		queue<T> q;
 		visited[source] = true;
 		q.push_back(source);
@@ -55,22 +50,17 @@ depth Operation: b.depth(u); // u == vertex of requested level // returns levels
 template <class T>
 class BFSwithDepth
 {
-	const T n;
-	vector<T> adjList, levels;
+	vector<vector<T>> adjList, levels;
 	vector<bool> visited;
 public:
-	BFSwithDepth(const T size) : n{size} { adjList.resize(size); }
-	void addEdge(const T u, const T v)
-	{
-		adjList[u].push_back(v);
-		adjList[v].push_back(u);
-	}
+	BFSwithDepth(const T size) { adjList.resize(size); }
+	void addEdge(const T u, const T v) { adjList[u].push_back(v); }
 	void explore(const T source)
 	{
 		levels.clear();
-		levels.resize(n);
+		levels.resize(adjList.size());
 		visited.clear();
-		visited.resize(n, false);
+		visited.resize(adjList.size(), false);
 		queue<T> q;
 		levels[source] = 0;
 		visited[source] = true;

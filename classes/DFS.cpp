@@ -9,24 +9,15 @@ getVisited Operation: d.getVisited(); // returns visited vector
 template <class T>
 class DFS
 {
-	const T n;
-	vector<T> adjList;
+	vector<vector<T>> adjList;
 	vector<bool> visited;
 public:
-	DFS(const T size)
-	: n{size}
-	{
-		adjList.resize(size);
-	}
-	void addEdge(const T u, const T v)
-	{
-		adjList[u].push_back(v);
-		adjList[v].push_back(u);
-	}
+	DFS(const T size) { adjList.resize(size); }
+	void addEdge(const T u, const T v) { adjList[u].push_back(v); }
 	void explore(const T source)
 	{
 		visited.clear();
-		visited.resize(n, false);
+		visited.resize(adjList.size(), false);
 		stack<T> s;
 		visited[source] = true;
 		s.push(source);
@@ -58,25 +49,19 @@ connected Operation: d.connected(u, v) // u, v == edge vertices // returns true 
 template <class T>
 class DFSwithComponents
 {
-	const T n;
-	vector<T> adjList, components;
+	vector<vector<T>> adjList, components;
 	vector<bool> visited;
 public:
-	DFSwithComponents(const T size) : n{size} {	adjList.resize(size); }
-	void addEdge(const T u, const T v)
-	{
-		adjList[u].push_back(v);
-		adjList[v].push_back(u);
-	}
+	DFSwithComponents(const T size) { adjList.resize(size); }
+	void addEdge(const T u, const T v) { adjList[u].push_back(v); }
 	void explore()
 	{
 		components.clear();
 		components.resize(n);
 		visited.clear();
-		visited.resize(n, false);
+		visited.resize(adjList.size(), false);
 		T componentNumber = 0;
 		for(auto& node : adjList)
-		{
 			if(!visited[node])
 			{
 				stack<T> s;
@@ -97,7 +82,6 @@ public:
 				}
 				componentNumber++;
 			}
-		}
 	}
 	vector<T> getAdjList(const T index) { return adjList[index]; }
 	vector<T> getAllComponents() { return components; }
