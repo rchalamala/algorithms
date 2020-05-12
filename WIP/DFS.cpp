@@ -25,12 +25,12 @@ public:
 		{
 			auto top = s.top();
 			s.pop();
-			for(auto neighbor = adjList[top].end(); neighbor != adjList[top].begin(); neighbor--)
+			for(auto& neighbor : adjList[top])
 				if(!visited[neighbor])
-				{
-					visited[neighbor] = true;
-					s.push(neighbor);
-				}
+					{
+						visited[neighbor] = true;
+						s.push(neighbor);
+					}
 		}
 	}
 	vector<T> getAdjList(const T index) { return adjList[index]; }
@@ -49,7 +49,8 @@ connected Operation: d.connected(u, v) // u, v == edge vertices // returns true 
 template <class T>
 class DFSwithComponents
 {
-	vector<vector<T>> adjList, components;
+	vector<vector<T>> adjList;
+	vector<T> components;
 	vector<bool> visited;
 public:
 	DFSwithComponents(const T size) { adjList.resize(size); }
@@ -57,22 +58,22 @@ public:
 	void explore()
 	{
 		components.clear();
-		components.resize(n);
+		components.resize(adjList.size(), 0);
 		visited.clear();
 		visited.resize(adjList.size(), false);
 		T componentNumber = 0;
-		for(auto& node : adjList)
-			if(!visited[node])
+		for(T i = 0; i < adjList.size(); i++)
+			if(!visited[i])
 			{
 				stack<T> s;
-				components[node] = componentNumber;
-				visited[node] = true;
-				s.push(node);
+				components[i] = componentNumber;
+				visited[i] = true;
+				s.push(i);
 				while (!s.empty())
 				{
 					auto top = s.top();
 					s.pop();
-					for(auto neighbor = adjList[top].end(); neighbor != adjList[top].begin(); neighbor--)
+					for(auto& neighbor : adjList[top])
 						if(!visited[neighbor])
 						{
 							components[neighbor] = componentNumber;
