@@ -4,16 +4,9 @@ T binary_exp(T base, T exp)
 	T res = 1;
 	while(exp)
 	{
-		if(exp & 1)
-		{
-			res *= base;
-			exp--;
-		}
-		else
-		{
-			base *= base;
-			exp /= 2;
-		}
+		if(exp & 1) res *= base;
+		base *= base;
+		exp /= 2;
 	}
 	return res;
 }

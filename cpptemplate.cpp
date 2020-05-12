@@ -25,10 +25,10 @@ using vi = std::vector<int>;
 using vll = std::vector<long long>;
 using vull = std::vector<unsigned long long>;
 
-#define FOR(i, a, b) for (auto i = (a); i < (b); ++i)
-#define F0R(i, a) FOR(i,0,a)
-#define ROF(i, a, b) for (auto i = (b); i > (a); --i)
-#define R0F(i, a) ROF(i,0,a)
+#define FOR(i, a, b) for (auto i = (a); i < (b); i++)
+#define F0R(i, a) FOR(i, 0, a)
+#define ROF(i, a, b) for (auto i = (b); i > (a); i--)
+#define R0F(i, a) ROF(i, 0, a)
 #define ITR(a, x) for (auto& a: x)
 
 #define FSRT(set) sort((set).begin(),(set).end())
@@ -96,14 +96,16 @@ public:
 	{ return std::chrono::duration_cast<std::chrono::duration<long double, std::ratio<1> >>(std::chrono::high_resolution_clock::now() - m_beg).count(); }
 };
 
+// Defines datatype
+typedef int dt;
 // Defines MAXN value
-// #define MAXN maxnvalue
+constexpr dt MAXN = 1e9;
 
 //*****
 //START CODE BELOW
 //*****
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 	setIO();
 

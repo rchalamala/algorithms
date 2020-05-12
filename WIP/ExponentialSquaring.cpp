@@ -6,8 +6,9 @@ template <typename T>
 T fast_exp(T base, T exponent, const T modulus)
 {
     T result = 1;
-    while(exponent > 0) {
-    	if(exponent % 2 == 1)
+    while(exponent)
+	{
+    	if(exponent & 1)
 		{
 	   		result *= base;
 			result %= modulus;
@@ -16,5 +17,5 @@ T fast_exp(T base, T exponent, const T modulus)
 		base %= modulus;
        	exponent /= 2;
     }
-    return result % modulus;
+    return result;
 }

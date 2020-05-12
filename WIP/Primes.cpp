@@ -18,7 +18,7 @@ Call: sieve(N) // N == number to return all primes less that or equal to // retu
 */
 
 template <typename T>
-vector<bool> sieve()
+vector<bool> sieve(T n)
 {
 	vector<bool> isPrime(n + 1, true);
     isPrime[0] = isPrime[1] = false;
@@ -51,3 +51,24 @@ bitset<MAXN> sieve()
 // Sieve of Eratosthenes (kindof, but faster, generates prime factorization, and uses more space) (COMPILE TIME CONSTANT REQUIRED - space-efficient)
 Call: sieve<datatype> () // define #MAXN maximum nvalue or const <datatype> MAXN = maximum nvalue or constexpr <datatype> MAXN = maximum nvalue // returns bitset with all primes marked as 1 and all composites marked as 0
 */
+
+
+// Factors
+template <typename T>
+vector<pair<T, T>> primeFactors(T n)
+{
+	vector<pair<T, T>> factors;
+	for(T i = 2; i <= n; i++)
+		if(n % i == 0)
+		{
+			dt count = 0;
+			while(n % i == 0)
+			{
+				count++;
+				n /= i;
+			}
+			factors.emplace_back(i, count);
+		}
+	if(n > 1) factors.emplace_back(n, 1);
+	return factors;
+}
