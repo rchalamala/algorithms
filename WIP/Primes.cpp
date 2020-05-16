@@ -58,7 +58,7 @@ template <typename T>
 vector<pair<T, T>> primeFactors(T n)
 {
 	vector<pair<T, T>> factors;
-	for(T i = 2; i <= n; i++)
+	for(T i = 2; i * i <= n; i++)
 		if(n % i == 0)
 		{
 			dt count = 0;

@@ -18,7 +18,7 @@ class UnionFind
 		return i;
 	}
 public:
-	QuickUnion(const T size)
+	UnionFind(const T size)
 	{
 		parents.resize(size);
 		iota(parents.begin(), parents.end(), 0);

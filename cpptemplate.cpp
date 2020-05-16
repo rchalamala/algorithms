@@ -27,8 +27,8 @@ using vull = std::vector<unsigned long long>;
 
 #define FOR(i, a, b) for (auto i = (a); i < (b); i++)
 #define F0R(i, a) FOR(i, 0, a)
-#define ROF(i, a, b) for (auto i = (b); i > (a); i--)
-#define R0F(i, a) ROF(i, 0, a)
+#define ROF(i, a, b) for (auto i = (a); i >= (b); i--)
+#define R0F(i, a) ROF(i, a, 0)
 #define ITR(a, x) for (auto& a: x)
 
 #define FSRT(set) sort((set).begin(),(set).end())
@@ -54,6 +54,7 @@ void setIO(const std::string name = "")
 	std::ofstream fout;
 	std::ios_base::sync_with_stdio(false);
 	std::cin.tie(nullptr);
+	std::cout.tie(nullptr);
 	if (!name.empty())
 	{
 		fin.open(name + ".in");
@@ -70,6 +71,7 @@ void setIO(const std::string name = "")
 {
 	std::ios_base::sync_with_stdio(false);
 	std::cin.tie(nullptr);
+	std::cout.tie(nullptr);
 	if (!name.empty())
 	{
 		freopen((name + ".in").c_str(), "r", stdin);
@@ -99,7 +101,9 @@ public:
 // Defines datatype
 typedef int dt;
 // Defines MAXN value
-constexpr dt MAXN = 1e9;
+constexpr dt MAXN = 1e9 + 1;
+// Defines Modulus
+constexpr dt MOD = 1000000007;
 
 //*****
 //START CODE BELOW
@@ -108,5 +112,10 @@ constexpr dt MAXN = 1e9;
 int main(int argc, char* argv[])
 {
 	setIO();
+	dt t; cin >> t;
+	while(t--)
+	{
+		dt n; cin >> n;
 
+	}
 }

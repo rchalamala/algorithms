@@ -3,6 +3,7 @@
 template<typename T>
 T exponentiation(T base, T exponent, T modulus = 0)
 {
+	if(exponent < 0) return (base == 1 ? 1 : 0);
 	T result = 1;
 	while(exponent)
 	{
@@ -15,5 +16,5 @@ T exponentiation(T base, T exponent, T modulus = 0)
 		if(modulus) base %= modulus;
 		exponent /= 2;
 	}
-	return result;
+	return (modulus ? result % modulus : result);
 }

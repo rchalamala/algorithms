@@ -8,12 +8,9 @@ T binarySearch(vector<T>& elements, const T target, T low, T high)
 	while(low <= high)
 	{
 		T midpoint = low + (high - low) / 2;
-		if(elements[midpoint] < target)
-			low = midpoint + 1;
-		else if(elements[midpoint] > target)
-			high = midpoint - 1;
-		else
-			return midpoint;
+		if(elements[midpoint] < target) low = midpoint + 1;
+		else if(elements[midpoint] > target) high = midpoint - 1;
+		else return midpoint;
 	}
 	return -1;
 }
