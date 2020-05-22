@@ -34,6 +34,7 @@ vector<bool> sieve(T n)
 Call: sieve<datatype> () // define #MAXN maximum nvalue or const <datatype> MAXN = maximum nvalue or constexpr <datatype> MAXN = maximum nvalue somewhere above the function // returns bitset with all primes marked as 1 and all composites marked as 0
 */
 
+//needs testing
 template <typename T>
 bitset<MAXN> sieve()
 {

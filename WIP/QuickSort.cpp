@@ -28,3 +28,16 @@ void sort(std::vector<T>& elements, T l, T r)
 		sort(elements, pivot + 1, r);
     }
 }
+
+template <class T>
+void sort(T first, T last)
+{
+	if (first == last) return;
+	auto pivot = *next(first, distance(first, last) >> 1);
+	auto lmid = partition(first, last, [pivot](const auto &element)
+	{ return element < pivot; });
+	auto rmid = partition(lmid, last, [pivot](const auto &element)
+	{ return pivot == element; });
+	sort(first, lmid);
+	sort(rmid, last);
+}
