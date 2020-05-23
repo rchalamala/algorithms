@@ -224,24 +224,29 @@ int main()
 template <typename T>
 void bsort(std::vector<T>& elements)
 {
-	T max = 1;
+	auto minmax = std::minmax_element(elements.begin(), elements.end());
+	T negative = *minmax.first < 0 ? static_cast<T>(floor(log10(abs(*minmax.first)))) + 1 : 0;
+	T positive = *minmax.second > 0 ? static_cast<T>(floor(log10(*minmax.second))) + 1 : 0;
+	T zeroCount = 0;
+	vector<vector<T>> negatives(negative), positives(positive);
 	for(auto& element : elements)
 	{
-		max = std::max(max, static_cast<T>(floor(log10(element))) + 1);
+		if(element > 0) positives[floor(log10(element))].push_back(element);
+		else if(element < 0) negatives[floor(log10(abs(element)))].push_back(element);
+		else zeroCount++;
 	}
-	vector<vector<T>> buckets(max);
-	for(auto& element : elements)
-	{
-		if(element) buckets[floor(log10(abs(element)))].push_back(element);
-		else buckets[0].push_back(0);
-	}
-	for(auto& bucket : buckets)
-		qsort<T>(bucket, 0, bucket.size() - 1);
-	vector<T> newelements;
-	for(auto& bucket : buckets)
+	for(auto& bucket : negatives)
+		std::sort(bucket.begin(), bucket.end()); // csort(bucket); //qsort<T>(bucket, 0, bucket.size() - 1);
+	for(auto& bucket : positives)
+		std::sort(bucket.begin(), bucket.end()); // csort(bucket); //qsort<T>(bucket, 0, bucket.size() - 1);
+	vector<T> newelements(zeroCount, 0);
+	for(auto& bucket : negatives)
+		newelements.insert(newelements.begin(), bucket.begin(), bucket.end());
+	for(auto& bucket : positives)
 		newelements.insert(newelements.end(), bucket.begin(), bucket.end());
 	elements = newelements;
 }
+
 int main()
 {
 	//setIO();
@@ -258,16 +263,18 @@ int main()
 		}
 		auto as1 = as, as2 = as, as3 = as, as4 = as, as5 = as;
 		Timer time1;
-		bsort<dt>(as1);
-		cout << time1.elapsed() << " : sort() \n";
-		//if(!is_sorted(as1.begin(), as1.end()))
-		//{
-		//	ITR(a, as1) cout << a << ' ';
-		//	return -1;
-		//}
+		csort<dt>(as1);
+		cout << time1.elapsed() << " : csort() \n";
+		/*
+		if(!is_sorted(as1.begin(), as1.end()))
+		{
+			ITR(a, as1) cout << a << ' ';
+			return -1;
+		}
+		*/
 		Timer time2;
-		csort<dt>(as2);
-		cout << time2.elapsed() << " : csort() \n";
+		bsort<dt>(as2);
+		cout << time2.elapsed() << " : sort() \n";
 		Timer time3;
 		qsort<dt>(as3, 0, as3.size() - 1);
 		cout << time3.elapsed() << " : qsort() \n";
