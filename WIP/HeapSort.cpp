@@ -24,3 +24,18 @@ void sort(vector<T> &elements)
 		pq.pop();
 	}
 }
+
+// other one
+
+template <typename T>
+void sort(vector<T>& elements)
+{
+	priority_queue<T> pq;
+	for(auto& element : elements) pq.push(element);
+	T i = elements.size() - 1;
+	while(!pq.empty())
+	{
+		elements[i--] = pq.top();
+		pq.pop();
+	}
+}

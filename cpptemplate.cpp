@@ -16,7 +16,7 @@ TASK:
 using namespace std;
 
 // freopen generates warnings in Visual Studio
-// #define VISUALSTUDIO
+#define VISUALSTUDIO
 
 using ll = long long;
 using ull = unsigned long long;
@@ -67,7 +67,7 @@ void setIO(const std::string name = "")
 #endif
 #ifndef VISUALSTUDIO
 
-void setIO(const std::string name = "")
+void setIO(const std::string& name = "")
 {
 	std::ios_base::sync_with_stdio(false);
 	std::cin.tie(nullptr);
