@@ -47,12 +47,14 @@ using vull = std::vector<unsigned long long>;
 #define FFND(set, target) find((set).begin(),(set).end(),target)
 #define RFND(set, target) rfind((set).begin(),(set).end(),target)
 
+#define WRAP(set) (set).begin(), (set).end()
+
 #define mp make_pair
 #define mt make_tuple
 #define pb push_back
 #define eb emplace_back
-#define f first
-#define s second
+#define ff first
+#define ss second
 
 // For stdio, call setIO() or setIO("").
 void setIO(std::ifstream &readFile, std::ofstream &writeFile, const std::string &name = "", bool stdIO = false)
@@ -90,13 +92,16 @@ public:
 // Defines datatype
 using dt = int;
 // Defines MAXN value
-constexpr dt MAXN = 1e9 + 1;
+constexpr dt MAXN = std::numeric_limits<dt>::max();
 // Defines Modulus
 constexpr dt MOD = 1e9 + 7;
+// Defines Floating Point Correction
+constexpr long double EPS = 1e-9;
 
 //*****
 //START CODE BELOW
 //*****
+
 
 int main(int argc, char *argv[])
 {
