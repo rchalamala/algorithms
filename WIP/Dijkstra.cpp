@@ -1,99 +1,59 @@
-/*
-
-*/
-
-template <class T>
+template<class T>
 class Dijkstra
 {
-	vector<vector<pair<T, T>>> adjList;
-	vector<bool> visited;
-	priority_queue< pair<T, T> > pq;
-	vector<T> cost, parents;
+	std::vector<std::vector<std::pair<T, T>>> adjacencyList;
+	std::vector<T> costs, parents;
+	std::vector<bool> visited;
+	std::priority_queue<std::pair<T, T>, std::vector<std::pair<T, T>>, std::greater<std::pair<T, T>>> next;
 public:
-	Dijkstra(const T size)
+	explicit Dijkstra(const T size)
+	{ adjacencyList.resize(size); }
+
+	explicit Dijkstra(const std::vector<std::vector<std::pair<T, T>>> &userAdjacencyList)
+	{ adjacencyList = userAdjacencyList; }
+
+	void addEdge(const T u, const T v, const T w, bool bidirectional = false)
 	{
-		adjList.resize(size);
-		cost.resize(size, numeric_limits<T>::max());
-		parents.resize(size, numeric_limits<T>::max());
+		adjacencyList[u].emplace_back(v, w);
+		if (bidirectional) adjacencyList[v].emplace_back(u, w);
 	}
-	void addEdge(const T u, const T v, const T w) { adjList[u].emplace_back(v, w); }
-	pair<T, T> explore(T source, T destination)
+
+	[[nodiscard]] T explore(T source, T destination)
 	{
 		visited.clear();
-		visited.resize(adjList.size(), false);
-		cost.clear();
-		cost.resize(adjList.size(), numeric_limits<T>::max());
+		visited.resize(adjacencyList.size(), false);
+		costs.clear();
+		costs.resize(adjacencyList.size(), std::numeric_limits<T>::max());
 		parents.clear();
-		parents.resize(adjList.size(), numeric_limits<T>::max());
-		cost[source] = 0;
-		pq.push(make_pair(-cost[source], source));
+		parents.resize(adjacencyList.size(), std::numeric_limits<T>::max());
+		costs[source] = 0;
 		parents[source] = 0;
-		while (!pq.empty())
+		next.push(make_pair(costs[source], source));
+		while (!next.empty())
 		{
-			T top = pq.top().second;
-			pq.pop();
+			T top = next.top().second;
+			next.pop();
 			visited[top] = true;
-			for(auto& neighbor : adjList[top])
-				if (!visited[neighbor.first] && cost[neighbor.first] > cost[top] + neighbor.second)
+			for (auto &neighbor : adjacencyList[top])
+				if (!visited[neighbor.first] && costs[neighbor.first] > costs[top] + neighbor.second)
 				{
-					cost[neighbor.first] = cost[top] + neighbor.second;
-					pq.push(make_pair(-cost[neighbor.first], neighbor.first));
+					costs[neighbor.first] = costs[top] + neighbor.second;
 					parents[neighbor.first] = top;
+					next.push(make_pair(costs[neighbor.first], neighbor.first));
 				}
 		}
-		return make_pair(parents[destination], cost[destination]);
+		return costs[destination];
 	}
-	vector<T> getAdjList(const T index) { return adjList[index]; }
-	vector<T> getCost() { return cost; }
-	vector<T> getParents() { return parents; }
-	vector<bool> getVisited() { return visited; }
-};
 
-// use with unsigned numbers
+	[[nodiscard]] std::vector<T> getNeighbors() const
+	{ return adjacencyList; }
 
-template <class T>
-class Dijkstra
-{
-	vector<vector<pair<T, T>>> adjList;
-	vector<bool> visited;
-	priority_queue< pair<T, T>, vector <pair<T, T>> , greater<pair<T, T>> > pq;
-	vector<T> cost, parents;
-public:
-	Dijkstra(const T size)
-	{
-		adjList.resize(size);
-		cost.resize(size, numeric_limits<T>::max());
-		parents.resize(size, numeric_limits<T>::max());
-	}
-	void addEdge(const T u, const T v, const T w) { adjList[u].emplace_back(v, w); }
-	pair<T, T> explore(T source, T destination)
-	{
-		visited.clear();
-		visited.resize(adjList.size(), false);
-		cost.clear();
-		cost.resize(adjList.size(), numeric_limits<T>::max());
-		parents.clear();
-		parents.resize(adjList.size(), numeric_limits<T>::max());
-		cost[source] = 0;
-		pq.push(make_pair(cost[source], source));
-		parents[source] = 0;
-		while (!pq.empty())
-		{
-			T top = pq.top().second;
-			pq.pop();
-			visited[top] = true;
-			for(auto& neighbor : adjList[top])
-				if (!visited[neighbor.first] && cost[neighbor.first] > cost[top] + neighbor.second)
-				{
-					cost[neighbor.first] = cost[top] + neighbor.second;
-					pq.push(make_pair(cost[neighbor.first], neighbor.first));
-					parents[neighbor.first] = top;
-				}
-		}
-		return make_pair(parents[destination], cost[destination]);
-	}
-	vector<T> getAdjList(const T index) { return adjList[index]; }
-	vector<T> getCost() { return cost; }
-	vector<T> getParents() { return parents; }
-	vector<bool> getVisited() { return visited; }
+	[[nodiscard]] std::vector<T> getCosts() const
+	{ return costs; }
+
+	[[nodiscard]] std::vector<T> getParents() const
+	{ return parents; }
+
+	[[nodiscard]] std::vector<bool> getVisited() const
+	{ return visited; }
 };

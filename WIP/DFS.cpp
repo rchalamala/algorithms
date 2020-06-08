@@ -6,35 +6,49 @@ getAdjList Operation: d.getAdjList(i); // i == vertex of requested adjacency lis
 getVisited Operation: d.getVisited(); // returns visited vector
 */
 
-template <class T>
+template<class T>
 class DFS
 {
-	vector<vector<T>> adjList;
-	vector<bool> visited;
+	std::vector<std::vector<T>> adjacencyList;
+	std::vector<bool> visited;
 public:
-	DFS(const T size) { adjList.resize(size); }
-	void addEdge(const T u, const T v) { adjList[u].push_back(v); }
+	explicit DFS(const T size)
+	{ adjacencyList.resize(size); }
+
+	explicit DFS(const std::vector<std::vector<T>> &userAdjacencyList)
+	{ adjacencyList = userAdjacencyList; }
+
+	void addEdge(const T u, const T v, bool bidirectional = false)
+	{
+		adjacencyList[u].push_back(v);
+		if (bidirectional) adjacencyList[v].push_back(u);
+	}
+
 	void explore(const T source)
 	{
 		visited.clear();
-		visited.resize(adjList.size(), false);
-		stack<T> s;
+		visited.resize(adjacencyList.size(), false);
+		std::stack<T> s;
 		visited[source] = true;
 		s.push(source);
 		while (!s.empty())
 		{
 			auto top = s.top();
 			s.pop();
-			for(auto& neighbor : adjList[top])
-				if(!visited[neighbor])
-					{
-						visited[neighbor] = true;
-						s.push(neighbor);
-					}
+			for (auto &neighbor : adjacencyList[top])
+				if (!visited[neighbor])
+				{
+					visited[neighbor] = true;
+					s.push(neighbor);
+				}
 		}
 	}
-	vector<T> getAdjList(const T index) { return adjList[index]; }
-	vector<bool> getVisited() { return visited; }
+
+	[[nodiscard]] std::vector<T> getNeighbors() const
+	{ return adjacencyList; }
+
+	[[nodiscard]] std::vector<bool> getVisited() const
+	{ return visited; }
 };
 
 /*
@@ -46,26 +60,37 @@ getAllComponents Operation: d.getAllComponents(); // returns all components rela
 getVisited Operation: d.getVisited(); // returns visited vector
 connected Operation: d.connected(u, v) // u, v == edge vertices // returns true if u and v are connected else returns false
 */
-template <class T>
+
+template<class T>
 class DFSwithComponents
 {
-	vector<vector<T>> adjList;
-	vector<T> components;
-	vector<bool> visited;
+	std::vector<std::vector<T>> adjacencyList;
+	std::vector<T> components;
+	std::vector<bool> visited;
 public:
-	DFSwithComponents(const T size) { adjList.resize(size); }
-	void addEdge(const T u, const T v) { adjList[u].push_back(v); }
+	explicit DFSwithComponents(const T size)
+	{ adjacencyList.resize(size); }
+
+	explicit DFSwithComponents(const std::vector<std::vector<T>> &userAdjacencyList)
+	{ adjacencyList = userAdjacencyList; }
+
+	void addEdge(const T u, const T v, bool bidirectional = false)
+	{
+		adjacencyList[u].push_back(v);
+		if (bidirectional) adjacencyList[v].push_back(u);
+	}
+
 	void explore()
 	{
 		components.clear();
-		components.resize(adjList.size(), 0);
+		components.resize(adjacencyList.size(), 0);
 		visited.clear();
-		visited.resize(adjList.size(), false);
+		visited.resize(adjacencyList.size(), false);
 		T componentNumber = 0;
-		for(T i = 0; i < adjList.size(); i++)
-			if(!visited[i])
+		for (T i = 0; i < adjacencyList.size(); i++)
+			if (!visited[i])
 			{
-				stack<T> s;
+				std::stack<T> s;
 				components[i] = componentNumber;
 				visited[i] = true;
 				s.push(i);
@@ -73,8 +98,8 @@ public:
 				{
 					auto top = s.top();
 					s.pop();
-					for(auto& neighbor : adjList[top])
-						if(!visited[neighbor])
+					for (auto &neighbor : adjacencyList[top])
+						if (!visited[neighbor])
 						{
 							components[neighbor] = componentNumber;
 							visited[neighbor] = true;
@@ -84,8 +109,16 @@ public:
 				componentNumber++;
 			}
 	}
-	vector<T> getAdjList(const T index) { return adjList[index]; }
-	vector<T> getAllComponents() { return components; }
-	vector<bool> getVisited() { return visited; }
-	bool connected(const T u, const T v) { return components[u] == components[v]; }
+
+	[[nodiscard]] std::vector<T> getNeighbors() const
+	{ return adjacencyList; }
+
+	[[nodiscard]] std::vector<T> getComponents() const
+	{ return components; }
+
+	[[nodiscard]] std::vector<bool> getVisited() const
+	{ return visited; }
+
+	[[nodiscard]] bool connected(const T u, const T v) const
+	{ return components[u] == components[v]; }
 };

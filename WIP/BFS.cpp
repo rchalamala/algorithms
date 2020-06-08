@@ -6,35 +6,49 @@ getAdjList Operation: b.getAdjList(i); // i == vertex of requested adjacency lis
 getVisited Operation: b.getVisited(); // returns visited vector
 */
 
-template <class T>
+template<class T>
 class BFS
 {
-	vector<T> adjList;
-	vector<bool> visited;
+	std::vector<std::vector<T>> adjacencyList;
+	std::vector<bool> visited;
+	std::queue<T> next;
 public:
-	BFS(const T size) { adjList.resize(size); }
-	void addEdge(const T u, const T v) { adjList[u].push_back(v); }
+	explicit BFS(const T size)
+	{ adjacencyList.resize(size); }
+
+	explicit BFS(const std::vector<std::vector<T>> &userAdjacencyList)
+	{ adjacencyList = userAdjacencyList; }
+
+	void addEdge(const T u, const T v, bool bidirectional = false)
+	{
+		adjacencyList[u].push_back(v);
+		if (bidirectional) adjacencyList[v].push_back(u);
+	}
+
 	void explore(const T source)
 	{
 		visited.clear();
-		visited.resize(adjList.size(), false);
-		queue<T> q;
+		visited.resize(adjacencyList.size(), false);
 		visited[source] = true;
-		q.push_back(source);
-		while(!q.empty())
+		next.push(source);
+		while (!next.empty())
 		{
-			auto front = q.front();
-			q.pop_front();
-			for(auto& neighbor : adjList[front])
-				if(!visited[neighbor])
+			auto front = next.front();
+			next.pop();
+			for (const auto &neighbor : adjacencyList[front])
+				if (!visited[neighbor])
 				{
 					visited[neighbor] = true;
-					q.push_back(neighbor);
+					next.push(neighbor);
 				}
 		}
 	}
-	vector<T> getAdjList(const T index) { return adjList[index]; }
-	vector<bool> getVisited() { return visited; }
+
+	[[nodiscard]] std::vector<T> getAdjacencyList() const
+	{ return adjacencyList; }
+
+	[[nodiscard]] std::vector<bool> getVisited() const
+	{ return visited; }
 };
 
 /*
@@ -47,39 +61,55 @@ getVisited Operation: b.getVisited(); // returns visited vector
 depth Operation: b.depth(u); // u == vertex of requested level // returns levels[u]
 */
 
-template <class T>
+template<class T>
 class BFSwithDepth
 {
-	vector<vector<T>> adjList, levels;
-	vector<bool> visited;
+	std::vector<std::vector<T>> adjacencyList;
+	std::vector<bool> visited;
+	std::vector<T> depths;
+	std::queue<T> next;
 public:
-	BFSwithDepth(const T size) { adjList.resize(size); }
-	void addEdge(const T u, const T v) { adjList[u].push_back(v); }
+	explicit BFSwithDepth(const T size)
+	{ adjacencyList.resize(size); }
+
+	explicit BFSwithDepth(const std::vector<std::vector<T>> &userAdjacencyList)
+	{ adjacencyList = userAdjacencyList; }
+
+	void addEdge(const T u, const T v, bool bidirectional = false)
+	{
+		adjacencyList[u].push_back(v);
+		if (bidirectional) adjacencyList[v].push_back(u);
+	}
+
 	void explore(const T source)
 	{
-		levels.clear();
-		levels.resize(adjList.size());
 		visited.clear();
-		visited.resize(adjList.size(), false);
-		queue<T> q;
-		levels[source] = 0;
+		visited.resize(adjacencyList.size(), false);
+		depths.clear();
+		depths.resize(adjacencyList.size());
 		visited[source] = true;
-		q.push_back(source);
-		while(!q.empty())
+		depths[source] = 0;
+		next.push(source);
+		while (!next.empty())
 		{
-			auto front = q.front();
-			q.pop_front();
-			for(auto& neighbor : adjList[front])
-				if(!visited[neighbor])
+			auto front = next.front();
+			next.pop();
+			for (const auto &neighbor : adjacencyList[front])
+				if (!visited[neighbor])
 				{
-					levels[neighbor] = levels[front] + 1;
 					visited[neighbor] = true;
-					q.push_back(neighbor);
+					depths[neighbor] = depths[front] + 1;
+					next.push(neighbor);
 				}
 		}
 	}
-	vector<T> getAdjList(const T index) { return adjList[index]; }
-	vector<T> getAllLevels() { return levels; }
-	vector<bool> getVisited() { return visited; }
-	T depth(const T node) { return levels[node]; }
+
+	[[nodiscard]] std::vector<T> getAdjacencyList() const
+	{ return adjacencyList; }
+
+	[[nodiscard]] std::vector<bool> getVisited() const
+	{ return visited; }
+
+	[[nodiscard]] std::vector<T> getDepths() const
+	{ return depths; }
 };

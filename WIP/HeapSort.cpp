@@ -1,41 +1,12 @@
-template <typename T>
-void sort(vector<T>& elements)
-{
-	priority_queue<T> pq;
-	for(auto& element : elements) pq.push(-element);
-	T i = 0;
-	while(!pq.empty())
-	{
-		elements[i++] = -pq.top();
-		pq.pop();
-	}
-}
-
-// use with unsigned numbers
 template<typename T>
-void sort(vector<T> &elements)
+void sort(std::vector<T> &elements)
 {
-	priority_queue<T, vector<T>, greater<T>> pq;
-	for (auto &element : elements) pq.push(element);
+	std::priority_queue<T, std::vector<T>, std::greater<T>> next;
+	for (const auto &element : elements) next.push(element);
 	T i = 0;
-	while (!pq.empty())
+	while (!next.empty())
 	{
-		elements[i++] = pq.top();
-		pq.pop();
-	}
-}
-
-// other one
-
-template <typename T>
-void sort(vector<T>& elements)
-{
-	priority_queue<T> pq;
-	for(auto& element : elements) pq.push(element);
-	T i = elements.size() - 1;
-	while(!pq.empty())
-	{
-		elements[i--] = pq.top();
-		pq.pop();
+		elements[i++] = next.top();
+		next.pop();
 	}
 }

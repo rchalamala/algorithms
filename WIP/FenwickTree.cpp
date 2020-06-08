@@ -8,22 +8,26 @@ query Operation: f.query(i, j) // i == start of sum, j == end of sum // returns 
 template<class T>
 class FenwickTree
 {
-	vector<T> table;
+	std::vector<T> tree;
 public:
-	FenwickTree(const T size) { table.resize(size + 1, 0); }
+	explicit FenwickTree(const T size)
+	{ tree.resize(size + 1, 0); }
+
 	void update(T i, T delta)
 	{
-		i++;
-		for (; i < table.size(); i += (i & (-i)))
-			table[i] += delta;
+		for (i++; i < tree.size(); i += (i & (-i)))
+			tree[i] += delta;
 	}
+
 	T sum(T i)
 	{
 		i++;
 		T sum = 0;
 		for (; i > 0; i -= (i & (-i)))
-			sum += table[i];
+			sum += tree[i];
 		return sum;
 	}
-	T query(T i, T j) { return sum(j) - sum(--i); }
+
+	T query(T i, T j) const
+	{ return sum(j) - sum(--i); }
 };

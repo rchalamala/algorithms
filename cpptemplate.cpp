@@ -1,5 +1,5 @@
 /*
-ID:
+ID: rchalam1
 LANG: C++14
 TASK:
 */
@@ -13,21 +13,27 @@ TASK:
 
 #include <bits/stdc++.h>
 
-using namespace std;
+/*
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <vector>
+*/
+// All Includes for Competitive Coding Template
 
-// freopen generates warnings in Visual Studio
-#define VISUALSTUDIO
+using namespace std;
 
 using ll = long long;
 using ull = unsigned long long;
+using ld = long double;
 
 using vi = std::vector<int>;
 using vll = std::vector<long long>;
 using vull = std::vector<unsigned long long>;
 
-#define FOR(i, a, b) for (auto i = (a); i < (b); i++)
+#define FOR(i, a, b) for (auto i = (a); i < (b); ++i)
 #define F0R(i, a) FOR(i, 0, a)
-#define ROF(i, a, b) for (auto i = (a); i >= (b); i--)
+#define ROF(i, a, b) for (auto i = (a); i >= (b); --i)
 #define R0F(i, a) ROF(i, a, 0)
 #define ITR(a, x) for (auto& a: x)
 
@@ -42,44 +48,27 @@ using vull = std::vector<unsigned long long>;
 #define RFND(set, target) rfind((set).begin(),(set).end(),target)
 
 #define mp make_pair
+#define mt make_tuple
 #define pb push_back
 #define eb emplace_back
+#define f first
+#define s second
 
 // For stdio, call setIO() or setIO("").
-#ifdef VISUALSTUDIO
-
-void setIO(const std::string name = "")
-{
-	std::ifstream fin;
-	std::ofstream fout;
-	std::ios_base::sync_with_stdio(false);
-	std::cin.tie(nullptr);
-	std::cout.tie(nullptr);
-	if (!name.empty())
-	{
-		fin.open(name + ".in");
-		fout.open(name + ".out");
-		std::cin.rdbuf(fin.rdbuf());
-		std::cout.rdbuf(fout.rdbuf());
-	}
-}
-
-#endif
-#ifndef VISUALSTUDIO
-
-void setIO(const std::string& name = "")
+void setIO(std::ifstream &readFile, std::ofstream &writeFile, const std::string &name = "", bool stdIO = false)
 {
 	std::ios_base::sync_with_stdio(false);
 	std::cin.tie(nullptr);
 	std::cout.tie(nullptr);
-	if (!name.empty())
+	if (!name.empty() && !stdIO)
 	{
-		freopen((name + ".in").c_str(), "r", stdin);
-		freopen((name + ".out").c_str(), "w", stdout);
+		readFile.open(name + ".in");
+		if (readFile.fail()) return;
+		writeFile.open(name + ".out");
+		std::cin.rdbuf(readFile.rdbuf());
+		std::cout.rdbuf(writeFile.rdbuf());
 	}
 }
-
-#endif
 
 // To time program, create object Timer  to start timing, and call Timer.elapsed().
 #include <chrono>
@@ -99,23 +88,27 @@ public:
 };
 
 // Defines datatype
-typedef int dt;
+using dt = int;
 // Defines MAXN value
 constexpr dt MAXN = 1e9 + 1;
 // Defines Modulus
-constexpr dt MOD = 1000000007;
+constexpr dt MOD = 1e9 + 7;
 
 //*****
 //START CODE BELOW
 //*****
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-	setIO();
-	dt t; cin >> t;
-	while(t--)
+	static std::ifstream readFile;
+	static std::ofstream writeFile;
+	setIO(readFile, writeFile);
+	dt t;
+	cin >> t;
+	while (t--)
 	{
-		dt n; cin >> n;
+		dt n;
+		cin >> n;
 
 	}
 }

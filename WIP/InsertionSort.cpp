@@ -1,14 +1,14 @@
 template <typename T>
 void sort(std::vector<T>& elements)
 {
-	for (T i = 0; i < elements.size(); i++)
+	for (T i = 0; i < elements.size(); ++i)
 	{
 		T key = elements[i];
 		T j = i;
-		while(j > 0 && key < elements[j - 1])
+		while(j && key < elements[j - 1])
 		{
 			std::swap(elements[j], elements[j - 1]);
-			j--;
+			--j;
 		}
 		elements[j] = key;
 	}

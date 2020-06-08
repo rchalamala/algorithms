@@ -2,10 +2,11 @@ template <typename T>
 vector<T> failureFunction(const string& pattern)
 {
 	vector<T> pi(pattern.size(), 0);
-	for(T j = 1; j < pattern.size(); j++)
+	for(T j = 1; j < pattern.size(); ++j)
 	{
 		T i = pi[j - 1];
-		while(i && pattern[i] != pattern[j]) i = pi[i - 1];
+		while(i && pattern[i] != pattern[j])
+			i = pi[i - 1];
 		pi[j] = pattern[i] == pattern[j] ? i + 1 : i;
 	}
 	return pi;
