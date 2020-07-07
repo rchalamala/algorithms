@@ -18,7 +18,7 @@ public:
 		if (bidirectional) adjacencyList[v].emplace_back(u, w);
 	}
 
-	[[nodiscard]] T explore(T source, T destination)
+	void explore(T source)
 	{
 		visited.clear();
 		visited.resize(adjacencyList.size(), false);
@@ -27,22 +27,22 @@ public:
 		parents.clear();
 		parents.resize(adjacencyList.size(), std::numeric_limits<T>::max());
 		costs[source] = 0;
-		parents[source] = 0;
-		next.push(make_pair(costs[source], source));
+		parents[source] = source;
+		next.emplace(costs[source], source);
 		while (!next.empty())
 		{
 			T top = next.top().second;
 			next.pop();
+			if (visited[top]) continue;
 			visited[top] = true;
 			for (auto &neighbor : adjacencyList[top])
 				if (!visited[neighbor.first] && costs[neighbor.first] > costs[top] + neighbor.second)
 				{
 					costs[neighbor.first] = costs[top] + neighbor.second;
 					parents[neighbor.first] = top;
-					next.push(make_pair(costs[neighbor.first], neighbor.first));
+					next.emplace(costs[neighbor.first], neighbor.first);
 				}
 		}
-		return costs[destination];
 	}
 
 	[[nodiscard]] std::vector<T> getNeighbors() const

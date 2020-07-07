@@ -15,15 +15,14 @@ public:
 
 	void update(T i, T delta)
 	{
-		for (i++; i < tree.size(); i += (i & (-i)))
+		for (++i; i < tree.size(); i += (i & (-i)))
 			tree[i] += delta;
 	}
 
 	T sum(T i)
 	{
-		i++;
 		T sum = 0;
-		for (; i > 0; i -= (i & (-i)))
+		for (++i; i > 0; i -= (i & (-i)))
 			sum += tree[i];
 		return sum;
 	}

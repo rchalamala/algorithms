@@ -14,4 +14,5 @@ Kadanes.cpp
 MergeSort.cpp
 PolarSort.cpp
 QuickSort.cpp
+SegmentTree.cpp
 SelectionSort.cpp

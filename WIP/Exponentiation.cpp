@@ -1,5 +1,3 @@
-// replaces BinaryExponentiation.cpp and ExponentialSquaring.cpp
-
 template<typename T>
 T power(T base, T exponent, T modulus = 0)
 {
@@ -7,7 +5,7 @@ T power(T base, T exponent, T modulus = 0)
 	T result = 1;
 	while (exponent)
 	{
-		if (exponent & 1)
+		if (exponent % 2)
 		{
 			result *= base;
 			if (modulus) result %= modulus;

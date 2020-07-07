@@ -105,9 +105,9 @@ constexpr long double EPS = 1e-9;
 
 int main(int argc, char *argv[])
 {
-	static std::ifstream readFile;
-	static std::ofstream writeFile;
-	setIO(readFile, writeFile);
+	static std::ifstream read;
+	static std::ofstream write;
+	setIO(read, write, "");
 	dt t;
 	cin >> t;
 	while (t--)

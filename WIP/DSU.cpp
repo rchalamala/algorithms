@@ -1,40 +1,36 @@
 template<class T>
 class DSU
 {
-	std::vector<T> parents, sizes;
+	std::vector<T> sizes, parent;
 public:
 
 	explicit DSU(const T size)
 	{
-		parents.resize(size);
-		iota(parents.begin(), parents.end(), 0);
-		sizes.resize(size, 1);
+	sizes.resize(size, 1);
+		parent.resize(size);
+		iota(parent.begin(), parent.end(), 0);
 	}
 
 	T root(T i)
 	{
-		while (i != parents[i])
-		{
-			parents[i] = parents[parents[i]];
-			i = parents[i];
-		}
+		while(i != parent[i]) i = parent[i] = parent[parent[i]];
 		return i;
 	}
 
-	void quickUnion(const T u, const T v)
+	bool connect(const T u, const T v)
 	{
-		T i = root(u);
-		T j = root(v);
-		if (i == j) return;
+		T i = root(u), j = root(v);
+		if (i == j) return false;
 		if (sizes[i] >= sizes[j])
 		{
-			parents[j] = i;
 			sizes[i] += sizes[j];
+			parents[j] = i;
 		}
 		else
 		{
-			parents[i] = j;
 			sizes[j] += sizes[i];
+			parents[i] = j;
 		}
+		return true;
 	}
 };
