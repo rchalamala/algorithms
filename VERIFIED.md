@@ -1,5 +1,7 @@
 VERIFIED ALGORITHMS
 
+NONE RIGHT NOW NEED TO REFORMAT
+
 BinarySearch.cpp
 BubbleSort.cpp
 CountingSort.cpp

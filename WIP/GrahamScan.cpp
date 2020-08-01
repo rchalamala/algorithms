@@ -32,26 +32,26 @@ public:
 		std::map<std::pair<T, T>, bool> inHull;
 		T minimum = 0;
 		inHull[coordinates[0]] = true;
-		for (T i = 1; i < coordinates.size(); ++i)
+		for(T i = 1; i < coordinates.size(); ++i)
 		{
-			if (inHull[coordinates[i]])
+			if(inHull[coordinates[i]])
 			{
 				coordinates.erase(coordinates.begin() + i--);
 				continue;
 			}
 			inHull[coordinates[i]] = true;
-			if (coordinates[i].second < coordinates[minimum].second || coordinates[i].second == coordinates[minimum].second && coordinates[i].first < coordinates[minimum].first)
+			if(coordinates[i].second < coordinates[minimum].second || coordinates[i].second == coordinates[minimum].second && coordinates[i].first < coordinates[minimum].first)
 				minimum = i;
 		}
-		if (coordinates.size() < 3) return hull;
+		if(coordinates.size() < 3) return hull;
 		anchor = coordinates[minimum];
 		coordinates.erase(coordinates.begin() + minimum);
 		sort(coordinates);
 		hull.push(anchor);
 		hull.push(coordinates[0]);
-		for (T i = 1; i < coordinates.size(); ++i)
+		for(T i = 1; i < coordinates.size(); ++i)
 		{
-			while (hull.size() > 1 && orientation(secondInStack(hull), hull.top(), coordinates[i]) <= 0)
+			while(hull.size() > 1 && orientation(secondInStack(), hull.top(), coordinates[i]) <= 0)
 				hull.pop();
 			hull.push(coordinates[i]);
 		}

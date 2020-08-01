@@ -1,7 +1,3 @@
-/*
-Call: ternarySearch(elements, target, low, high) // elements == referenced vector (create and sort before calling function), target == element to look for, low == lower bound of search, high = upper bound of search // returns target index if found otherwise -1
-*/
-
 template <typename T>
 T ternarySearch(vector<T>& elements, const T target, T low, T high)
 {

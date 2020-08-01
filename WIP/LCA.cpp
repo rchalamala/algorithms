@@ -41,7 +41,6 @@ class LCA
 	{
 		if(low > tree[i].high || tree[i].low > high) return -1;
 		if(low <= tree[i].low && tree[i].high <= high) return tree[i].value;
-		T midpoint = low + (high - low) / 2;
 		T left = query(2 * i, low, high);
 		T right = query(2 * i + 1, low, high);
 		if(left == -1) return right;
@@ -49,7 +48,7 @@ class LCA
 		return index(left, right);
 	}
 public:
-	LCA(const vector<vector<T>>& children, T root = 0)
+	explicit LCA(const vector<vector<T>>& children, T root = 0)
 	{
 		heights.resize(children.size()); euler.reserve(2 * children.size()); first.resize(children.size());
 		dfs(root, root, children);
@@ -63,5 +62,8 @@ public:
 		T right = first[v];
 		return query(1, min(left, right), max(left, right));
 	}
+
+	T distance(T u, T v)
+	{ return heights[u] + heights[v] - 2 * heights[lca(u, v)]; }
 
 };

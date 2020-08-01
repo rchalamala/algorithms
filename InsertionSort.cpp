@@ -1,10 +1,10 @@
-template <typename T>
-void sort(std::vector<T>& elements)
+template<typename T>
+void sort(std::vector<T> &elements)
 {
-	for (T i = 0; i < elements.size(); ++i)
+	for(std::size_t i = 0; i < elements.size(); ++i)
 	{
 		T key = elements[i];
-		T j = i;
+		std::size_t j = i;
 		while(j && key < elements[j - 1])
 		{
 			std::swap(elements[j], elements[j - 1]);

@@ -1,26 +1,26 @@
 template<typename T>
 T wrappingKadanes(const std::vector<T> &elements)
 {
-	T total = 0, positive = 0, positiveMax = 0, negative = 0, negativeMax = 0;
+	T total = 0, positive = 0, positiveAnswer = 0, negative = 0, negativeAnswer = 0;
 	for (const auto &element : elements)
 	{
 		total += element;
 		positive = std::max(positive + element, element);
 		negative = std::max(negative - element, -element);
-		positiveMax = std::max(positiveMax, positive);
-		negativeMax = std::max(negativeMax, negative);
+		positiveAnswer = std::max(positiveAnswer, positive);
+		negativeAnswer = std::max(negativeAnswer, negative);
 	}
-	return std::max(positiveMax, total + negativeMax);
+	return std::max(positiveAnswer, total + negativeAnswer);
 }
 
 template<typename T>
 T kadanes(const std::vector<T> &elements)
 {
-	T current = 0, currentMax = 0;
+	T current = 0, answer = 0;
 	for (const auto &element : elements)
 	{
 		current = std::max(current + element, element);
-		currentMax = std::max(currentMax, current);
+		answer = std::max(answer, current);
 	}
-	return currentMax;
+	return answer;
 }

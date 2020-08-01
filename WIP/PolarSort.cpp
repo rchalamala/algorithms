@@ -1,5 +1,3 @@
-// sorts by polar angle relative to the given anchor
-
 template<typename T>
 void sort(const std::pair<T, T> &anchor, std::vector<std::pair<T, T>> &elements)
 {
