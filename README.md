@@ -1,3 +1,4 @@
 All classes are zero-indexed, unless otherwise specified.
 
-Code in VERIFIED.md should work.
+PROJECT ARCHIVED
+Refer to: https://github.com/rchalamala/CP
